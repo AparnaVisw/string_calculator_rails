@@ -1,24 +1,29 @@
-# README
+# String Calculator
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple Ruby on Rails service that parses a string of numbers separated by delimiters and returns their sum. This project implements the popular String Calculator kata with enhancements, validations, and full RSpec test coverage.
 
-Things you may want to cover:
+---
 
-* Ruby version
+## Features
 
-* System dependencies
+- Supports comma (`,`) and newline (`\n`) delimiters by default
+- Supports custom single or multiple delimiters, including multi-character delimiters (e.g. `//[***][%]\n1***2%3`)
+- Validates input format and raises errors for:
+  - Delimiters at start or end of the string
+  - Consecutive delimiters
+  - Invalid characters in input
+- Detects and raises errors listing **negative numbers**
+- Ignores numbers larger than 1000 in the sum
+- Thorough RSpec test suite covering normal and edge cases
 
-* Configuration
+---
 
-* Database creation
+## Usage
 
-* Database initialization
+### Add method
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```ruby
+StringCalculator.add("1,2,3")                  #=> 6
+StringCalculator.add("//;\n1;2")               #=> 3
+StringCalculator.add("//[***][%]\n1***2%3")    #=> 6
+StringCalculator.add("1000,2,1001")             #=> 1002
