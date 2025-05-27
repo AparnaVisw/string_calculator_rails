@@ -16,6 +16,9 @@ A simple Ruby on Rails service that parses a string of numbers separated by deli
 - Ignores numbers larger than 1000 in the sum
 - Thorough RSpec test suite covering normal and edge cases
 
+
+## Running rspec
+bundle exec rspec spec/services/string_calculator_spec.rb
 ---
 
 ## Usage
@@ -27,3 +30,9 @@ StringCalculator.add("1,2,3")                  #=> 6
 StringCalculator.add("//;\n1;2")               #=> 3
 StringCalculator.add("//[***][%]\n1***2%3")    #=> 6
 StringCalculator.add("1000,2,1001")             #=> 1002
+
+StringCalculator.add("1,-2,3")                  # Raises ArgumentError: Negatives not allowed: -2
+StringCalculator.add(",1,2")                     # Raises ArgumentError: Delimiter should not appear at the start or end
+
+
+
